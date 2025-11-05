@@ -16,7 +16,7 @@ function findNeighbors(graph, node) {
    let neighbors = [];
    let y = 0;
    let x = 0;
-   console.log(node);
+   //console.log(node);
    for (let di of [-1, 1]) {
       x = node[0] + di;
       if (x >= 0 && x < SIZE) {
@@ -34,24 +34,29 @@ function findNeighbors(graph, node) {
 
 }
 
-
+//add edge to node in graph
 function addEdge(graph, node, neighbor) {
    return [graph[node], neighbor];
 }
 
+//compare if list is in set visited
+function compareValues(neighbor, visited) {
+   for (let item of visited.keys()) {
+      if (item.toString() == neighbor.toString()) {
+         return true;
+      }
+   }
+   return false;
+   
+}
 
+
+//main function
 function maze(graph, node, visited) {
    let neighbors = findNeighbors(graph, node);
 
-   console.log("bing");
-   console.log(visited);
-
-   console.log("bong");
-   console.log(neighbors);
    for (let neighbor of neighbors) {
-      console.log(neighbor);
-      if (visited.has(neighbor)) {
-         console.log("hello");
+      if (compareValues(neighbor, visited)) {
          continue;
       }
       visited.add(node);
@@ -63,6 +68,11 @@ function maze(graph, node, visited) {
    }
    return graph;
 
+}
+
+
+function printGraph(grapph) {
+   
 }
 
 let graph = makeMaze();
