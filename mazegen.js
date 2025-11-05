@@ -31,8 +31,9 @@ function findNeighbors(graph, node) {
       }
    }
    return neighbors;
-
 }
+
+
 
 //add edge to node in graph
 function addEdge(graph, node, neighbor) {
@@ -49,6 +50,13 @@ function compareValues(neighbor, visited) {
    return false;
    
 }
+
+// function getRandomElement(neighbors) {
+//    const randomI = Math.floor(Math.random() * neighbors.length);
+
+//    return 
+
+// }
 
 
 //main function
@@ -71,7 +79,7 @@ function maze(graph, node, visited) {
 }
 
 
-function printGraph(grapph) {
+function printGraph(graph) {
    
 }
 
