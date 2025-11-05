@@ -49,7 +49,8 @@ function maze(graph, node, visited) {
    console.log("bong");
    console.log(neighbors);
    for (let neighbor of neighbors) {
-      if (neighbor in visited) {
+      console.log(neighbor);
+      if (visited.has(neighbor)) {
          console.log("hello");
          continue;
       }
