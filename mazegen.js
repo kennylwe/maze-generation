@@ -1,4 +1,4 @@
-const SIZE = 10;
+const SIZE = 3;
 
 function makeMaze(){
 
@@ -12,7 +12,52 @@ function makeMaze(){
    let grid = makeGrid();
 
    for (let point in graph) {
-      grid[Number(point[0])][Number(point[2])] = graph[point].length;
+      point = point.split(",");
+      grid[parseInt(point[0]) * 2 + 1][parseInt(point[1]) * 2 + 1] = ".";
+      
+   }
+
+
+   let xval = 0;
+   let yval = 0;
+   printGrid(grid);
+   for (let point in graph) {
+      let x = false; //true = larger false = shorter
+      let y = false; //true = larger false = shorter
+
+      for (let node of graph[point]) {
+         if (point[0] > node[0]) {
+            xval++;
+         } else if (point[0] < node[0]) {
+            xval--;
+         }
+         if (point[1] > node[1]) {
+            yval++;
+         } else if (point[1] < node[1]) {
+            yval--;
+         }
+
+//          if (x) {
+//             xval--;
+//          } else {
+//             xval++;
+//          }
+
+//          if (y) {
+//             yval--;
+//          } else {
+//             yval++;
+//          }
+
+         grid[parseInt(node[0]) * 2 + xval][parseInt(node[1]) * 2 + yval] = ".";
+
+
+         xval = 0;
+         yval = 0;
+         x = false;
+         y = false;
+      }
+      // grid[parseInt(graph[point][0]) * 2 + 1][parseInt(graph[point][1]) * 2 + 1] = ".";
    }
    return grid;
 }
@@ -80,8 +125,8 @@ function reOrder(neighbors) {
 }
 
 function printGrid(grid) {
-  for (let i = 0; i < SIZE; i++) {
-    for (let j = 0; j < SIZE; j++) {
+  for (let i = 0; i < SIZE * 2 + 1; i++) {
+    for (let j = 0; j < SIZE * 2 + 1; j++) {
        process.stdout.write(grid[i][j].toString());
     }
     console.log("");
@@ -115,10 +160,10 @@ function maze(graph, node, visited) {
 
 function makeGrid(graph) {
    const grid = [];
-   for (let i = 0; i < SIZE; i++) {
+   for (let i = 0; i < SIZE * 2 + 1; i++) {
       let row = [];
-      for (let j = 0; j < SIZE; j++) {
-         row.push(0);
+      for (let j = 0; j < SIZE * 2 + 1; j++) {
+         row.push("#");
       }
       grid.push(row);
    }
@@ -127,3 +172,5 @@ function makeGrid(graph) {
 
 let graph = makeMaze();
 printGrid(graph);
+
+
