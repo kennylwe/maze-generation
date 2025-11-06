@@ -1,4 +1,4 @@
-const SIZE = 5;
+const SIZE = 10;
 
 function makeMaze(){
 
@@ -12,10 +12,7 @@ function makeMaze(){
    let grid = makeGrid();
 
    for (let point in graph) {
-      console.log(point);
-      console.log(graph[point]);
-      console.log(graph[point].length);
-      grid[point[0], point[1]] = graph[point].length;
+      grid[Number(point[0])][Number(point[2])] = graph[point].length;
    }
    return grid;
 }
@@ -46,11 +43,12 @@ function findNeighbors(graph, node) {
 //add edge to node in graph
 function addEdge(graph, node, neighbor) {
    let placer;
+   
    if (typeof graph[node] === "undefined") {
       placer = [];
    }
-    else {
-       placer = [graph[node]];
+   else {
+      placer = graph[node];
    }
    placer.push(neighbor);
    return placer;
@@ -95,19 +93,17 @@ function printGrid(grid) {
 function maze(graph, node, visited) {
    let neighbors = findNeighbors(graph, node);
    neighbors = reOrder(neighbors);
-   console.log(graph);
 
    for (let neighbor of neighbors) {
       if (compareValues(neighbor, visited)) {
          continue;
       }
       visited.add(node);
-      console.log(graph);
 
 
       //graph[node] = addEdge(graph, node, neighbor);
       
-      graph[node] = addEdge(graph, node, neighbors);
+      graph[node] = addEdge(graph, node, neighbor);
       
       maze(graph, neighbor, visited);
    }
