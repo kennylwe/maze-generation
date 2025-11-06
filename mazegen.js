@@ -104,6 +104,7 @@ function maze(graph, node, visited) {
       //graph[node] = addEdge(graph, node, neighbor);
       
       graph[node] = addEdge(graph, node, neighbor);
+      graph[neighbor] = addEdge(graph, neighbor, node);
       
       maze(graph, neighbor, visited);
    }
