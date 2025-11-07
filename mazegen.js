@@ -16,25 +16,21 @@ function makeMaze(){
       grid[parseInt(point[0]) * 2 + 1][parseInt(point[1]) * 2 + 1] = ".";
       
    }
-
+   printGrid(grid);
 
    let xval = 0;
    let yval = 0;
-   printGrid(grid);
    for (let point in graph) {
-      let x = false; //true = larger false = shorter
-      let y = false; //true = larger false = shorter
-
       for (let node of graph[point]) {
          if (point[0] > node[0]) {
-            xval++;
+            xval = 1;
          } else if (point[0] < node[0]) {
-            xval--;
+            xval = -1;
          }
          if (point[1] > node[1]) {
-            yval++;
+            yval = 1;
          } else if (point[1] < node[1]) {
-            yval--;
+            yval = -1;
          }
 
 //          if (x) {
@@ -54,10 +50,9 @@ function makeMaze(){
 
          xval = 0;
          yval = 0;
-         x = false;
-         y = false;
       }
-      // grid[parseInt(graph[point][0]) * 2 + 1][parseInt(graph[point][1]) * 2 + 1] = ".";
+ 
+     // grid[parseInt(graph[point][0]) * 2 + 1][parseInt(graph[point][1]) * 2 + 1] = ".";
    }
    return grid;
 }
