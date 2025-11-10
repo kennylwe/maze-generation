@@ -2,9 +2,7 @@ const SIZE = 3;
 
 function makeMaze(){
 
-   let graph = {
-
-   };
+   let graph = {};
    let node = [0,0];
    let visited = new Set();
    graph = maze(graph, node, visited);
@@ -16,40 +14,33 @@ function makeMaze(){
       grid[parseInt(point[0]) * 2 + 1][parseInt(point[1]) * 2 + 1] = ".";
       
    }
-   printGrid(grid);
+   // printGrid(grid);
 
    let xval = 0;
    let yval = 0;
    for (let point in graph) {
       for (let node of graph[point]) {
+         if (typeof point === "string") {
+           point = point.split(",")
+           point = [parseInt(point[0]), parseInt(point[1])]
+         }
+         console.log(point)
          if (point[0] > node[0]) {
             xval = 1;
          } else if (point[0] < node[0]) {
             xval = -1;
+         } else {
+            xval = 0
          }
          if (point[1] > node[1]) {
             yval = 1;
          } else if (point[1] < node[1]) {
             yval = -1;
+         } else {
+            yval = 0
          }
 
-//          if (x) {
-//             xval--;
-//          } else {
-//             xval++;
-//          }
-
-//          if (y) {
-//             yval--;
-//          } else {
-//             yval++;
-//          }
-
-         grid[parseInt(node[0]) * 2 + xval][parseInt(node[1]) * 2 + yval] = ".";
-
-
-         xval = 0;
-         yval = 0;
+         grid[node[0] * 2 + 1 + xval][node[1] * 2 + 1 + yval] = ".";
       }
  
      // grid[parseInt(graph[point][0]) * 2 + 1][parseInt(graph[point][1]) * 2 + 1] = ".";
@@ -114,9 +105,7 @@ function reOrder(neighbors) {
       currentI--;
       [neighbors[currentI], neighbors[randomI]] = [neighbors[randomI], neighbors[currentI]];
    }
-
    return neighbors;
-
 }
 
 function printGrid(grid) {
@@ -134,12 +123,12 @@ function maze(graph, node, visited) {
    let neighbors = findNeighbors(graph, node);
    neighbors = reOrder(neighbors);
 
+      visited.add(node);
+
    for (let neighbor of neighbors) {
       if (compareValues(neighbor, visited)) {
          continue;
       }
-      visited.add(node);
-
 
       //graph[node] = addEdge(graph, node, neighbor);
       
@@ -149,9 +138,7 @@ function maze(graph, node, visited) {
       maze(graph, neighbor, visited);
    }
    return graph;
-
 }
-
 
 function makeGrid(graph) {
    const grid = [];
@@ -167,5 +154,3 @@ function makeGrid(graph) {
 
 let graph = makeMaze();
 printGrid(graph);
-
-
