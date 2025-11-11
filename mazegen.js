@@ -1,4 +1,4 @@
-const SIZE = 3;
+const SIZE = 10;
 
 function makeMaze(){
 
@@ -6,12 +6,20 @@ function makeMaze(){
    let node = [0,0];
    let visited = new Set();
    graph = maze(graph, node, visited);
+   return graph;
+}
 
+
+
+
+
+
+function formatMaze(graph) {
    let grid = makeGrid();
 
    for (let point in graph) {
       point = point.split(",");
-      grid[parseInt(point[0]) * 2 + 1][parseInt(point[1]) * 2 + 1] = ".";
+      grid[parseInt(point[0]) * 2 + 1][parseInt(point[1]) * 2 + 1] = " ";
       
    }
    // printGrid(grid);
@@ -40,13 +48,20 @@ function makeMaze(){
             yval = 0
          }
 
-         grid[node[0] * 2 + 1 + xval][node[1] * 2 + 1 + yval] = ".";
+         grid[node[0] * 2 + 1 + xval][node[1] * 2 + 1 + yval] = " ";
       }
  
      // grid[parseInt(graph[point][0]) * 2 + 1][parseInt(graph[point][1]) * 2 + 1] = ".";
    }
    return grid;
 }
+
+
+
+
+
+
+
 
 function findNeighbors(graph, node) {
    let neighbors = [];
@@ -152,5 +167,27 @@ function makeGrid(graph) {
    return grid;
 }
 
+
+function solveMaze(graph) {
+   for (let node in graph) {
+      continue;
+   }
+   return graph;
+}
+
+
+
+
+
+
+
+
 let graph = makeMaze();
-printGrid(graph);
+
+let grid = formatMaze(graph);
+
+printGrid(grid);
+
+let newmaze = solveMaze(graph);
+
+
