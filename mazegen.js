@@ -168,10 +168,18 @@ function makeGrid(graph) {
 }
 
 
-function solveMaze(graph) {
+
+
+function heuristic(current, end) {
+   return abs(current[0] - end[0]) + abs(current[1] - end[1]);
+}
+
+
+function solveMaze(graph, end) {
    for (let node in graph) {
       continue;
    }
+   
    return graph;
 }
 
