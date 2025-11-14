@@ -1,4 +1,7 @@
 const SIZE = 10;
+const START = [0,0]
+const END = [SIZE-1, SIZE-1]
+
 
 function makeMaze(){
 
@@ -138,7 +141,7 @@ function maze(graph, node, visited) {
    let neighbors = findNeighbors(graph, node);
    neighbors = reOrder(neighbors);
 
-      visited.add(node);
+   visited.add(node);
 
    for (let neighbor of neighbors) {
       if (compareValues(neighbor, visited)) {
@@ -175,11 +178,10 @@ function heuristic(current, end) {
 }
 
 
-function solveMaze(graph, end) {
-   for (let node in graph) {
-      continue;
-   }
+function solveMaze(graph, current, end, traveled) {
+   let neighbors = findNeighbors(graph, current);
    
+   //solveMaze(graph, visitor
    return graph;
 }
 
@@ -196,6 +198,9 @@ let grid = formatMaze(graph);
 
 printGrid(grid);
 
-let newmaze = solveMaze(graph);
+
+let currenttraveled = 0;
+
+let newmaze = solveMaze(graph, START, END, currenttraveled);
 
 
