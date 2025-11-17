@@ -178,11 +178,32 @@ function heuristic(current, end) {
 }
 
 
-function solveMaze(graph, current, end, traveled) {
-   let neighbors = findNeighbors(graph, current);
-   
-   //solveMaze(graph, visitor
-   return graph;
+function solveMaze(graph, current, end, traveled, path) {
+   let h;
+   let decisions;
+   for (let node of graph[current]) {
+      h = heuristic(node);
+      decisions.append(h + traveled + 1);
+   }
+   let min = 0;
+
+   for (let val of decisions) {
+      if (val < min) {
+         min = val;
+      }
+   }
+
+   for (let node of graph[current]) {
+      h = heuristic(node);
+      if (min == h + traveled + 1) {
+         path.push(current);
+         solveMaze(graph, node, end, traveled+1, path);
+         break;
+      }
+   }
+
+   //solveMaze(graph, visitor)
+   return path;
 }
 
 
@@ -200,7 +221,9 @@ printGrid(grid);
 
 
 let currenttraveled = 0;
+let path = [];
+path = solveMaze(graph, START, END, currenttraveled, path);
 
-let newmaze = solveMaze(graph, START, END, currenttraveled);
 
+console.log(path);
 
