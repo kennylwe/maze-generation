@@ -1,7 +1,4 @@
 const SIZE = 10;
-const START = [0,0]
-const END = [SIZE-1, SIZE-1]
-
 
 function makeMaze(){
 
@@ -205,6 +202,11 @@ function solveMaze(graph, current, end, traveled, path) {
    //solveMaze(graph, visitor)
    return path;
 }
+
+
+
+
+
 
 
 
