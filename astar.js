@@ -47,6 +47,10 @@ function init_graph(adjs) {
   for (let x of Object.keys(adjs)) {
     let [i, j] = x.split(",");
     graph.push(new Node(parseInt(i), parseInt(j), []));
+
+    // Go through adjacency list again
+    // For each adjacent node, FIND the node that corresponds with it
+    //      Add it to its adjacency
   }
 
   for (let adjls of adjs) {
@@ -63,14 +67,25 @@ function init_graph(adjs) {
   return graph;
 }
 
-//Go through each adjacency list again
-//for each adjacency node find node that corresponds to it
-//    add it to adjacency
 
+function astar(graph, start, end) {
+  // Get all explorable nodes
+  // Find the lowest heuristic explorable node
+  // Explore that node
+  //     - Make nodes around it explorable (all)
+  //     - Check neighbors (in closed), see which parent is shortest
+  //     - Fix neighbors (in closed), see if setting their parent to this node is better
+  // Repeat until we get to end
 
+  open = []  // explorable (all nodes on the "boundary")
+  closed = []  // Already explored (visited)
+  current = start
 
+  while (!current.equals(end)) {
+    // A Star here!
+  }
 
-let node = new Node(10, 15);
-console.log(node.dist_to_end(new Node(15, 20)));
-console.log(node)
+  return end.get_path_from(start)
+}
+
 
