@@ -1,4 +1,11 @@
-const SIZE = 10;
+const SIZE = 20;
+
+
+const canvas = document.querySelector("#grid");
+const ctx = canvas.getContext("2d");
+
+
+
 
 function makeMaze(){
 
@@ -7,6 +14,7 @@ function makeMaze(){
    let visited = new Set();
    graph = maze(graph, node, visited);
    return graph;
+
 }
 
 
@@ -206,26 +214,44 @@ function solveMaze(graph, current, end, traveled, path) {
 
 
 
+function drawGrid(grid) {
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   let dy = canvas.height / (SIZE * 2 + 1);
+
+   let dx = canvas.width / (SIZE * 2 + 1);
+
+   for (let i = 0; i < SIZE * 2 + 1; i++) {
+      for (let j = 0; j < SIZE * 2 + 1; j++) {
+         if (grid[i][j] == "#") {
+            ctx.fillRect(dx * i, dy * j, dx, dy);
+         }
+      }
+   }
+}
+
+function finalMaze() {
+   let graph = makeMaze();
+   let grid = formatMaze(graph);
+   drawGrid(grid);
+
+  
+
+}
 
 
 
 
 
 
-
-
-
-let graph = makeMaze();
-
-let grid = formatMaze(graph);
-
-printGrid(grid);
+//printGrid(grid);
+//drawGrid(grid);
 
 
 let currenttraveled = 0;
 let path = [];
-path = solveMaze(graph, START, END, currenttraveled, path);
+
+//path = solveMaze(graph, START, END, currenttraveled, path);
 
 
-console.log(path);
+//console.log(path);
 
