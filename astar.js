@@ -70,8 +70,6 @@ function init_graph(adjs) {
 }
 
 
-
-
 function astar(graph, start, end) {
   // Get all explorable nodes
   // Find the lowest heuristic explorable node

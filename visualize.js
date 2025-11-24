@@ -1,13 +1,7 @@
-import "./mazegen.js";
-
+import { makeMaze, formatMaze, SIZE } from "./mazegen.js";
 
 const canvas = document.querySelector("#grid");
 const ctx = canvas.getContext("2d");
-
-
-
-
-
 
 function drawGrid(grid) {
    ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -29,5 +23,5 @@ export function finalMaze() {
    let grid = formatMaze(graph);
    drawGrid(grid);
 }
-finalMaze()
 
+finalMaze()

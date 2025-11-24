@@ -1,13 +1,4 @@
-
-
-const SIZE = 5;
-
-
-const canvas = document.querySelector("#grid");
-const ctx = canvas.getContext("2d");
-
-
-
+export const SIZE = 5;
 
 export function makeMaze(){
 
@@ -16,13 +7,7 @@ export function makeMaze(){
    let visited = new Set();
    graph = maze(graph, node, visited);
    return graph;
-
 }
-
-
-
-
-
 
 export function formatMaze(graph) {
    let grid = makeGrid();
@@ -66,13 +51,6 @@ export function formatMaze(graph) {
    return grid;
 }
 
-
-
-
-
-
-
-
 function findNeighbors(graph, node) {
    let neighbors = [];
    let y = 0;
@@ -94,8 +72,6 @@ function findNeighbors(graph, node) {
    return neighbors;
 }
 
-
-
 //add edge to node in graph
 function addEdge(graph, node, neighbor) {
    let placer;
@@ -110,7 +86,7 @@ function addEdge(graph, node, neighbor) {
    return placer;
 }
 
-//compare if list is in set visited
+// compare if list is in set visited
 function compareValues(neighbor, visited) {
    for (let item of visited.keys()) {
       if (item.toString() == neighbor.toString()) {
@@ -140,7 +116,6 @@ function printGrid(grid) {
     console.log("");
   }
 }
-
 
 //main function
 function maze(graph, node, visited) {
@@ -176,13 +151,9 @@ function makeGrid(graph) {
    return grid;
 }
 
-
-
-
 function heuristic(current, end) {
    return abs(current[0] - end[0]) + abs(current[1] - end[1]);
 }
-
 
 function solveMaze(graph, current, end, traveled, path) {
    let h;
@@ -212,23 +183,7 @@ function solveMaze(graph, current, end, traveled, path) {
    return path;
 }
 
-
-
-
-
-
-
-
-
-//printGrid(grid);
-//drawGrid(grid);
-
-
 let currenttraveled = 0;
 let path = [];
 
 //path = solveMaze(graph, START, END, currenttraveled, path);
-
-
-//console.log(path);
-
