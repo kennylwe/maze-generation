@@ -1,3 +1,5 @@
+
+
 class Node {
   constructor(x, y, adj) {
     this.x = x;
@@ -66,6 +68,8 @@ function init_graph(adjs) {
 
   return graph;
 }
+
+
 
 
 function astar(graph, start, end) {
