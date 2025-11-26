@@ -1,4 +1,4 @@
-export const SIZE = 5;
+export const SIZE = 20;
 
 export function makeMaze(){
 

@@ -49,6 +49,7 @@ function init_graph(adjs) {
   for (let x of Object.keys(adjs)) {
     let [i, j] = x.split(",");
     graph.push(new Node(parseInt(i), parseInt(j), []));
+    console.log(graph);
 
     // Go through adjacency list again
     // For each adjacent node, FIND the node that corresponds with it
@@ -84,10 +85,15 @@ function astar(graph, start, end) {
   current = start
 
   while (!current.equals(end)) {
+    open = 
+
     // A Star here!
   }
 
   return end.get_path_from(start)
 }
+
+
+init_graph(adjs)
 
 

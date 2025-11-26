@@ -18,10 +18,10 @@ function drawGrid(grid) {
    }
 }
 
-export function finalMaze() {
+export function finalMaze(draw) {
    let graph = makeMaze();
    let grid = formatMaze(graph);
-   drawGrid(grid);
+   if (draw) {drawGrid(grid)}
 }
 
 // 1. Write a function in visualize to draw the information on a square
