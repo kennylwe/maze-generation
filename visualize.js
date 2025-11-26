@@ -39,4 +39,7 @@ export function finalMaze(draw) {
 //    - Use this to debug!
 //    - https://www.youtube.com/watch?v=-L-WgKMFuhE&t=569s
 
-finalMaze()
+
+window.finalMaze = finalMaze;
+
+
