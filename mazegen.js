@@ -51,7 +51,7 @@ export function formatMaze(graph) {
    return grid;
 }
 
-function findNeighbors(graph, node) {
+export function findNeighbors(graph, node) {
    let neighbors = [];
    let y = 0;
    let x = 0;

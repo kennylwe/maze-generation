@@ -1,5 +1,4 @@
 
-
 class Node {
   constructor(x, y, adj) {
     this.x = x;
@@ -71,6 +70,21 @@ function init_graph(adjs) {
 }
 
 
+
+
+function getNeighbors(node, graph) {
+  let neighbors = [];
+  let y = 0;
+  let x = 0;
+
+  for (let dx of [-1, 1] {
+    x = node.x + dx;
+    if (x < graph[0].length) {
+      neighbors.push([x, node.y]);
+    }
+  }
+}
+
 function astar(graph, start, end) {
   // Get all explorable nodes
   // Find the lowest heuristic explorable node
@@ -82,10 +96,13 @@ function astar(graph, start, end) {
 
   open = []  // explorable (all nodes on the "boundary")
   closed = []  // Already explored (visited)
-  current = start
+  current = start;
+  let neighbors;
 
   while (!current.equals(end)) {
-    open = 
+    neighbors = getNeighbors(current, graph)
+    for (let node of
+      
 
     // A Star here!
   }
