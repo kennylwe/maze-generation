@@ -1,3 +1,4 @@
+import { init_graph } from "./astar.js";
 import { makeMaze, formatMaze, SIZE } from "./mazegen.js";
 
 const canvas = document.querySelector("#grid");
@@ -13,6 +14,7 @@ function drawGrid(grid) {
       for (let j = 0; j < SIZE * 2 + 1; j++) {
          if (grid[i][j] == "#") {
             ctx.fillRect(dx * i, dy * j, dx, dy);
+            ctx.fillText(init_graph.
          }
       }
    }
@@ -23,6 +25,16 @@ export function finalMaze(draw) {
    let grid = formatMaze(graph);
    if (draw) {drawGrid(grid)}
 }
+
+
+function drawInformation(f, g, parent, x, y, maxwidth) {
+   ctx.fillText(String(f), x, y, maxwidth);
+
+
+   return null;
+}
+
+
 
 // 1. Write a function in visualize to draw the information on a square
 //    - f, g, h, parent

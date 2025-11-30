@@ -1,5 +1,7 @@
+import { makeMaze } from "./mazegen.js"
 
-class Node {
+
+export class Node {
   constructor(x, y, adj) {
     this.x = x;
     this.y = y;
@@ -43,7 +45,7 @@ class Node {
 
 }
 
-function init_graph(adjs) {
+export function init_graph(adjs) {
   let graph = [];
   for (let x of Object.keys(adjs)) {
     let [i, j] = x.split(",");
@@ -53,14 +55,16 @@ function init_graph(adjs) {
     // Go through adjacency list again
     // For each adjacent node, FIND the node that corresponds with it
     //      Add it to its adjacency
+    
   }
+  console.log(adjs)
 
-  for (let adjls of adjs) {
-    for (let adj of adjls) {
-      for (let conode of adjs) {
-        if (adj[0] == conode[0] && adj[1] == conode[1]) {
-          
-        }
+  for (let adjls in adjs) { //adjls is a list of adjacent nodes
+    let [x,y] = adjls.split(',');
+    adjls = [parseInt(x), parseInt(y)];
+    for (let node of graph) { //adj is a single position
+      if (adjls[0] == node.x && adjls[1] == node.y) {
+        node.adj.push(adjls);
       }
     }
   }
@@ -77,7 +81,7 @@ function getNeighbors(node, graph) {
   let y = 0;
   let x = 0;
 
-  for (let dx of [-1, 1] {
+  for (let dx of [-1, 1]) {
     x = node.x + dx;
     if (x < graph[0].length) {
       neighbors.push([x, node.y]);
@@ -101,7 +105,7 @@ function astar(graph, start, end) {
 
   while (!current.equals(end)) {
     neighbors = getNeighbors(current, graph)
-    for (let node of
+    //for (let node of
       
 
     // A Star here!
@@ -110,6 +114,7 @@ function astar(graph, start, end) {
   return end.get_path_from(start)
 }
 
+let adjs = makeMaze();
 
 init_graph(adjs)
 
