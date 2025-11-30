@@ -14,7 +14,6 @@ function drawGrid(grid) {
       for (let j = 0; j < SIZE * 2 + 1; j++) {
          if (grid[i][j] == "#") {
             ctx.fillRect(dx * i, dy * j, dx, dy);
-            ctx.fillText(init_graph.
          }
       }
    }
@@ -27,11 +26,13 @@ export function finalMaze(draw) {
 }
 
 
-function drawInformation(f, g, parent, x, y, maxwidth) {
+function drawInformation(f, g, parent, x, y, maxwidth, visited) {
+   if (visited) {
+      ctx.fillStyle = "red"
+   } else {
+      ctx.fillStyle = "green"
+   }
    ctx.fillText(String(f), x, y, maxwidth);
-
-
-   return null;
 }
 
 
