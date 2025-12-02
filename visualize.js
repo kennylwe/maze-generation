@@ -32,7 +32,9 @@ function drawInformation(f, g, parent, x, y, maxwidth, visited) {
    } else {
       ctx.fillStyle = "green"
    }
-   ctx.fillText(String(f), x, y, maxwidth);
+   ctx.fillText(String(f), x - (maxwidth * 0.5), y + (maxwidth * 0.5), maxwidth);
+   ctx.fillText(String(g), x + (maxwidth * 0.5), y + (maxwidth * 0.5), maxwidth);
+   ctx.fillText(String(f + g), x - (maxwidth * 0.5), y, maxwidth);
 }
 
 

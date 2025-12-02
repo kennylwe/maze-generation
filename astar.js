@@ -50,14 +50,12 @@ export function init_graph(adjs) {
   for (let x of Object.keys(adjs)) {
     let [i, j] = x.split(",");
     graph.push(new Node(parseInt(i), parseInt(j), []));
-    console.log(graph);
 
     // Go through adjacency list again
     // For each adjacent node, FIND the node that corresponds with it
     //      Add it to its adjacency
     
   }
-  console.log(adjs)
 
   for (let adjls in adjs) { //adjls is a list of adjacent nodes
     let [x,y] = adjls.split(',');
@@ -102,11 +100,23 @@ function astar(graph, start, end) {
   closed = []  // Already explored (visited)
   current = start;
   let neighbors;
+  let lowesth;
 
   while (!current.equals(end)) {
     neighbors = getNeighbors(current, graph)
-    //for (let node of
-      
+    for (n of neighbors) {
+      if (!closed.includes(n)) {
+        open.push(n);
+      }
+    }
+    
+    for (h of open) {
+      if (h.heuristic() < lowesth;) {
+        lowesth = h.heuristic();
+      }
+    }
+    
+
 
     // A Star here!
   }
