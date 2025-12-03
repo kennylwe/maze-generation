@@ -1,6 +1,3 @@
-import { makeMaze } from "./mazegen.js"
-
-
 export class Node {
   constructor(x, y, adj) {
     this.x = x;
@@ -10,12 +7,12 @@ export class Node {
   }
 
   equals(other) {
-    return this.x == other.x && this.y == other.y
+    return this.x == other.x && this.y == other.y;
   }
 
   // h function (straight line distance to the end)
   dist_to_end(end) {
-    return Math.sqrt((this.x - end.x) ** 2 + (this.y - end.y) ** 2)
+    return Math.sqrt((this.x - end.x) ** 2 + (this.y - end.y) ** 2);
   }
 
   // g function (path distance to start)
@@ -24,7 +21,7 @@ export class Node {
     if (this.equals(start)) {
       return 0;
     } else {
-      return 1 + this.parent.dist_to_start(start)
+      return 1 + this.parent.dist_to_start(start);
     }
   }
 
@@ -34,15 +31,12 @@ export class Node {
   }
 
   get_path_from(start) {
-    if (this.equals(start)){
+    if (this.equals(start)) {
       return [];
     } else {
       return getpath(start, this.parent) + [this];
     }
   }
-
-
-
 }
 
 export function init_graph(adjs) {
@@ -54,25 +48,22 @@ export function init_graph(adjs) {
     // Go through adjacency list again
     // For each adjacent node, FIND the node that corresponds with it
     //      Add it to its adjacency
-    
   }
 
-  for (let adjls in adjs) { //adjls is a list of adjacent nodes
-    let [x,y] = adjls.split(',');
+  for (let adjls in adjs) {
+    //adjls is a list of adjacent nodes
+    let [x, y] = adjls.split(",");
     adjls = [parseInt(x), parseInt(y)];
-    for (let node of graph) { //adj is a single position
+    for (let node of graph) {
+      //adj is a single position
       if (adjls[0] == node.x && adjls[1] == node.y) {
         node.adj.push(adjls);
       }
     }
   }
 
-
   return graph;
 }
-
-
-
 
 function getNeighbors(node, graph) {
   let neighbors = [];
@@ -96,36 +87,27 @@ function astar(graph, start, end) {
   //     - Fix neighbors (in closed), see if setting their parent to this node is better
   // Repeat until we get to end
 
-  open = []  // explorable (all nodes on the "boundary")
-  closed = []  // Already explored (visited)
+  open = []; // explorable (all nodes on the "boundary")
+  closed = []; // Already explored (visited)
   current = start;
   let neighbors;
   let lowesth;
 
   while (!current.equals(end)) {
-    neighbors = getNeighbors(current, graph)
+    neighbors = getNeighbors(current, graph);
     for (n of neighbors) {
       if (!closed.includes(n)) {
         open.push(n);
       }
     }
-    
+
     for (h of open) {
-      if (h.heuristic() < lowesth;) {
+      if (h.heuristic() < lowesth) {
         lowesth = h.heuristic();
       }
     }
-    
-
-
     // A Star here!
   }
 
-  return end.get_path_from(start)
+  return end.get_path_from(start);
 }
-
-let adjs = makeMaze();
-
-init_graph(adjs)
-
-
