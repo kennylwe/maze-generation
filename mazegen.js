@@ -24,7 +24,6 @@ export function formatMaze(graph) {
         point = point.split(",");
         point = [parseInt(point[0]), parseInt(point[1])];
       }
-      console.log(point);
       if (point[0] > node[0]) {
         xval = 1;
       } else if (point[0] < node[0]) {
