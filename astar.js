@@ -17,9 +17,11 @@ export class Node {
 
   // g function (path distance to start)
   dist_to_start(start) {
-    // TODO: This is very slow, we should have a dist_to_start tracked as we go
+    // TODO: This is slow, we should have a dist_to_start tracked as we go
     if (this.equals(start)) {
       return 0;
+    } else if (this.parent == null) {
+      return null;
     } else {
       return 1 + this.parent.dist_to_start(start);
     }
@@ -39,28 +41,29 @@ export class Node {
   }
 }
 
+export function find_node(graph, x, y) {
+  for (let node of graph) {
+    if (node.x == x && node.y == y) {
+      return node;
+    }
+  }
+  throw new Error("Failed to find node", x, y);
+}
+
 export function init_graph(adjs) {
   let graph = [];
   for (let x of Object.keys(adjs)) {
     let [i, j] = x.split(",");
     graph.push(new Node(parseInt(i), parseInt(j), []));
-
-    // Go through adjacency list again
-    // For each adjacent node, FIND the node that corresponds with it
-    //      Add it to its adjacency
   }
 
-  for (let adjls in adjs) {
-    //adjls is a list of adjacent nodes
-    let [x, y] = adjls.split(",");
-    adjls = [parseInt(x), parseInt(y)];
-    for (let node of graph) {
-      //adj is a single position
-      if (adjls[0] == node.x && adjls[1] == node.y) {
-        node.adj.push(adjls);
-      }
-    }
+  for (let node in adjs) {
+    let [x, y] = node.split(",");
+    let astar_node = find_node(graph, parseInt(x), parseInt(y));
+    astar_node.adj = adjs[node];
   }
+
+  console.log(graph);
 
   return graph;
 }
