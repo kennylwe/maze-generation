@@ -68,6 +68,23 @@ export function init_graph(adjs) {
   return graph;
 }
 
+
+function toTravel(open) {
+  let lowesth;
+  for (h of open) {
+    if (h.heuristic() < lowesth) {
+      lowesth = h.heuristic();
+    }
+  }
+  for (h of open) {
+    if (h.heuristic() == lowesth) {
+      return h;
+    }
+  }
+  return null;
+}
+
+
 function getNeighbors(node, graph) {
   let neighbors = [];
   let y = 0;
@@ -81,7 +98,7 @@ function getNeighbors(node, graph) {
   }
 }
 
-function astar(graph, start, end) {
+export function astar(graph, start, end) {
   // Get all explorable nodes
   // Find the lowest heuristic explorable node
   // Explore that node
@@ -89,12 +106,10 @@ function astar(graph, start, end) {
   //     - Check neighbors (in closed), see which parent is shortest
   //     - Fix neighbors (in closed), see if setting their parent to this node is better
   // Repeat until we get to end
-
   open = []; // explorable (all nodes on the "boundary")
   closed = []; // Already explored (visited)
   current = start;
   let neighbors;
-  let lowesth;
 
   while (!current.equals(end)) {
     neighbors = getNeighbors(current, graph);
@@ -103,14 +118,9 @@ function astar(graph, start, end) {
         open.push(n);
       }
     }
-
-    for (h of open) {
-      if (h.heuristic() < lowesth) {
-        lowesth = h.heuristic();
-      }
-    }
+    closed.push(current);
+    current = toTravel(open);
     // A Star here!
   }
-
   return end.get_path_from(start);
 }

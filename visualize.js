@@ -1,4 +1,4 @@
-import { init_graph } from "./astar.js";
+import { init_graph, astar } from "./astar.js";
 import { makeMaze, formatMaze, SIZE } from "./mazegen.js";
 
 const canvas = document.querySelector("#grid");
@@ -33,7 +33,7 @@ function drawGrid(grid) {
   }
 }
 
-function drawNode(node, visited) {
+function drawNode(node, visited, start) {
   const width = canvas.width / (2 * SIZE + 1);
   let [x, y] = [(2 * node.x + 1) * width, (2 * node.y + 1) * width];
   if (visited) {
@@ -41,16 +41,24 @@ function drawNode(node, visited) {
   } else {
     ctx.fillStyle = "green";
   }
+  
   // TODO: Fill in with [f], [g], and [h] valus
   // TODO: Fill in [parent] values
-  ctx.fillText("TEST", x + (width * 0.5), y + (width * 0.5), width);
+
+  ctx.fillText(node.dist_to_start(start), x + (width * 0.5), y + (width * 0.5), width);
   ctx.fillStyle = "black";
 }
 
 function drawAStar(astar) {
+  let start;
+  for (let node of astar) {
+    if (node.x == 0 && node.y == 0) {
+      start = node;
+    }
+  }
   for (let node of astar) {
     // TODO: Replace with true [visited]
-    drawNode(node, true);
+    drawNode(node, true, start);
   }
 }
 
