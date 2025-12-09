@@ -10,7 +10,7 @@ export class Node {
     return this.x == other.x && this.y == other.y;
   }
 
-  // h function (straight line distance to the end)
+  // f function (straight line distance to the end)
   dist_to_end(end) {
     return Math.sqrt((this.x - end.x) ** 2 + (this.y - end.y) ** 2);
   }
@@ -27,7 +27,7 @@ export class Node {
     }
   }
 
-  // f function (heuristic)
+  // h function (heuristic)
   heuristic(start, end) {
     return this.dist_to_start(start) + this.dist_to_end(end);
   }

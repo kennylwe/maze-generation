@@ -33,7 +33,33 @@ function drawGrid(grid) {
   }
 }
 
-function drawNode(node, visited, start) {
+function drawArrow(dx, dy, x, y, width) {
+  ctx.beginPath();
+  if (dx == 1) {
+    ctx.moveTo((x + width * 0.5), y);
+    ctx.lineTo(x + width, y + (width * 0.5));
+    ctx.lineTo((x + width * 0.5), y + width);
+  }
+  if (dx == -1) {
+    ctx.moveTo((x + width * 0.5), y);
+    ctx.lineTo(x, y + (width * 0.5));
+    ctx.lineTo((x + width * 0.5), y + width);
+  }
+  if (dy == 1) {
+    ctx.moveTo(x, y + (width * 0.5));
+    ctx.lineTo(x + (width * 0.5), y + width);
+    ctx.lineTo((x + width), y + (0.5 * width));
+  }
+  if (dy == -1) {
+    ctx.moveTo(x, y + (width * 0.5));
+    ctx.lineTo(x + (width * 0.5), y);
+    ctx.lineTo((x + width), y + (0.5 * width));
+  }
+  ctx.stroke()
+}
+
+
+function drawNode(node, visited, start, end) {
   const width = canvas.width / (2 * SIZE + 1);
   let [x, y] = [(2 * node.x + 1) * width, (2 * node.y + 1) * width];
   if (visited) {
@@ -44,21 +70,37 @@ function drawNode(node, visited, start) {
   
   // TODO: Fill in with [f], [g], and [h] valus
   // TODO: Fill in [parent] values
-
-  ctx.fillText(node.dist_to_start(start), x + (width * 0.5), y + (width * 0.5), width);
+  if (!(node.parent == null)) {
+    let dx = node.parent[0] - node.x;
+    let dy = node.parent[1] - node.y;
+    drawArrow(dx, dy, x, y, width);
+  }
+  let g = Math.floor(node.dist_to_end(end));
+  let f = Math.floor(node.dist_to_start(start));
+  let h = Math.floor(node.heuristic(start, end));
+  //draw heuristic
+  ctx.fillText(h, x + (width * 0.5), y + (width * 0.5), width);
+  //draw g value
+  ctx.fillText(f, x + (width * 0.25), y + (width * 0.75), width);
+  //draw f value
+  ctx.fillText(g, x + (width * 0.75), y + (width * 0.75), width);
   ctx.fillStyle = "black";
 }
 
 function drawAStar(astar) {
   let start;
+  let end;
   for (let node of astar) {
     if (node.x == 0 && node.y == 0) {
       start = node;
     }
+    if (node.x == SIZE - 1 && node.y == SIZE - 1) {
+      end = node;
+    }
   }
   for (let node of astar) {
     // TODO: Replace with true [visited]
-    drawNode(node, true, start);
+    drawNode(node, true, start, end);
   }
 }
 
