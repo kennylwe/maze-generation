@@ -69,14 +69,15 @@ export function init_graph(adjs) {
 }
 
 
-function toTravel(open) {
+function toTravel(open,graph) {
   let lowesth;
-  for (h of open) {
+  for (let h of open) {
+    h = find_node(graph,h[0],h[1]);
     if (h.heuristic() < lowesth) {
       lowesth = h.heuristic();
     }
   }
-  for (h of open) {
+  for (let h of open) {
     if (h.heuristic() == lowesth) {
       return h;
     }
@@ -98,7 +99,7 @@ function getNeighbors(node, graph) {
   }
 }
 
-export function astar(graph, start, end) {
+export function run_astar(graph, start, end) {
   // Get all explorable nodes
   // Find the lowest heuristic explorable node
   // Explore that node
@@ -106,21 +107,48 @@ export function astar(graph, start, end) {
   //     - Check neighbors (in closed), see which parent is shortest
   //     - Fix neighbors (in closed), see if setting their parent to this node is better
   // Repeat until we get to end
-  open = []; // explorable (all nodes on the "boundary")
-  closed = []; // Already explored (visited)
-  current = start;
+  let open = [start]; // explorable (all nodes on the "boundary")
+  let closed = []; // Already explored (visited)
   let neighbors;
-
-  while (!current.equals(end)) {
+  //get lowest H value in open
+  //for x in open
+  //  find lowest h value
+  //current = node_lowest_h
+  //if current == end:
+  //  stop loop
+  //add to closed
+  //take out of open
+  //with that node in closed get neighbors of that node
+  //neighbors = getNeighbors(current)
+  //for y of neighbors
+  //  if node in open AND path is shorter, then set that node as parent of y
+  //
+  //for x in neighbors
+  //  add to open if not in closed
+  //  set x.parent to current
+  //
+  //repeat
+  while (true) {
+    current = toTravel(open,graph);
+    if (current == end) {
+      break;
+    }
+    closed.push(current);
+    open = open.filter(x => (!x.equals(current)));
     neighbors = getNeighbors(current, graph);
+    for (y of neighbors) {
+      if (y.includes(open) && y.parent.dist_to_start(start) > current.dist_to_start(start)) {
+        y.parent = current;
+      }
+    }
     for (n of neighbors) {
       if (!closed.includes(n)) {
         open.push(n);
+        n.parent = current;
       }
     }
-    closed.push(current);
-    current = toTravel(open);
     // A Star here!
+
   }
   return end.get_path_from(start);
 }

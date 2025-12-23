@@ -1,4 +1,4 @@
-import { init_graph, astar } from "./astar.js";
+import { init_graph, run_astar } from "./astar.js";
 import { makeMaze, formatMaze, SIZE } from "./mazegen.js";
 
 const canvas = document.querySelector("#grid");
@@ -109,6 +109,7 @@ export function finalMaze() {
   let grid = formatMaze(graph);
   drawGrid(grid);
   let astar = init_graph(graph);
+  run_astar(astar, [0,0], [5,5]);
   drawAStar(astar);
 }
 
